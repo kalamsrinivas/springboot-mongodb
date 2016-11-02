@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>Customers</title>
+		<style>
+			table, th, td {
+			   border: 1px solid black;
+			   border-spacing: 0px;
+			}
+			th, td {
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Street</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Zip Code</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="customer : ${customerList}">
+					<td th:text="${customer.name}"></td>
+					<td th:text="${customer.age}"></td>
+					<td th:text="${customer.address.street}"></td>
+					<td th:text="${customer.address.city}"></td>
+					<td th:text="${customer.address.state}"></td>
+					<td th:text="${customer.address.zip}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<br />
+		<h2>Add Customer</h2>
+		<form action="/addcustomer" method="POST">
+			Name <input type="text" id="name" name="name" /><br />
+			Age <input type="text" id="age" name="age" /><br />
+			Street <input type="text" id="address.street" name="address.street" /><br />
+			City <input type="text" id="address.city" name="address.city" /><br />
+			State <input type="text" id="address.state" name="address.state" /><br />
+			Zip Code <input type="text" id="address.zip" name="address.zip" /><br />
+			<input type="submit" />
+		</form>
+		<h2>Search for customers</h2>
+		<form action="/search" method="POST">
+			<input type="text" name="search" id="search" th:value="${search}" />
+			<input type="submit" value="Search" />
+		</form>
+	</body>
+</html>
